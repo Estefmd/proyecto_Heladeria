@@ -90,14 +90,14 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "sabor='" + sabor + '\'' +
-                ", tipoCono='" + tipoCono + '\'' +
-                ", adicionalTopping='" + adicionalTopping + '\'' +
-                ", tipoProducto='" + tipoProducto + '\'' +
-                ", stockAlmacen=" + stockAlmacen +
-                ", precioTotal=" + precioTotal +
-                ", idProducto=" + idProducto +
-                '}';
+        return "Producto: " + "\n" +
+                "sabor: " + sabor + "\n" +
+                "tipoCono: " + tipoCono + "\n" +
+                "adicionalTopping: " + adicionalTopping + "\n" +
+                "tipoProducto: " + tipoProducto + "\n" +
+                "stockAlmacen: " + stockAlmacen + "\n" +
+                "precioTotal: " + precioTotal + "\n" +
+                "idProducto: " + idProducto +"\n" +
+                "________";
     }
 }
