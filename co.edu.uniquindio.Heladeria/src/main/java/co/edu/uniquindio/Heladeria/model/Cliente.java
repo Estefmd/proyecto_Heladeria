@@ -1,63 +1,22 @@
 package co.edu.uniquindio.Heladeria.model;
 
-public class Cliente {
-    private String nombre;
-    private String apellido;
-    private int documento;
-    private int edad;
+public class Cliente extends Persona{
     private String fechaCompra;
 
     private Heladeria ownedByHeladeria;
 
     public Cliente() {
     }
-
-    public Cliente(String nombre, String apellido, int documento, int edad, String fechaCompra) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.documento = documento;
-        this.edad = edad;
+    public Cliente(String nombre, String apellido, int documento, int edad, String fechaCompra, Heladeria ownedByHeladeria) {
+        super(nombre, apellido, documento, edad);
         this.fechaCompra = fechaCompra;
+        this.ownedByHeladeria = ownedByHeladeria;
     }
-
     public Heladeria getOwnedByHeladeria() {
         return ownedByHeladeria;
     }
-
     public void setOwnedByHeladeria(Heladeria ownedByHeladeria) {
         this.ownedByHeladeria = ownedByHeladeria;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public int getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(int documento) {
-        this.documento = documento;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public String getFechaCompra() {
@@ -66,5 +25,12 @@ public class Cliente {
 
     public void setFechaCompra(String fechaCompra) {
         this.fechaCompra = fechaCompra;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "fechaCompra='" + fechaCompra + '\'' +
+                '}';
     }
 }

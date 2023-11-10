@@ -1,61 +1,30 @@
 package co.edu.uniquindio.Heladeria.model;
 
-public class Empleado {
-    private String nombre;
-    private String apellido;
-    private String identificacion;
+public class Empleado extends Persona{
     private String horario;
     private String antiguedad;
     private String puestoTrabajo;
     private double salario;
     private int cantHorasExtra;
-
     private Heladeria ownedByHeladeria;
 
     public Empleado() {
     }
-
-    public Empleado(String nombre, String apellido, String identificacion, String horario, String antiguedad, String puestoTrabajo, double salario, int cantHorasExtra) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.identificacion = identificacion;
+    public Empleado(String nombre, String apellido, int documento, int edad, String horario, String antiguedad, String puestoTrabajo, double salario, int cantHorasExtra, Heladeria ownedByHeladeria) {
+        super(nombre, apellido, documento, edad);
         this.horario = horario;
         this.antiguedad = antiguedad;
         this.puestoTrabajo = puestoTrabajo;
         this.salario = salario;
         this.cantHorasExtra = cantHorasExtra;
+        this.ownedByHeladeria = ownedByHeladeria;
     }
 
     public Heladeria getOwnedByHeladeria() {
         return ownedByHeladeria;
     }
-
     public void setOwnedByHeladeria(Heladeria ownedByHeladeria) {
         this.ownedByHeladeria = ownedByHeladeria;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getIdentificacion() {
-        return identificacion;
-    }
-
-    public void setIdentificacion(String identificacion) {
-        this.identificacion = identificacion;
     }
 
     public String getHorario() {
@@ -100,13 +69,12 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", identificacion='" + identificacion + '\'' +
-                ", horario='" + horario + '\'' +
+        return "Empleado{" +
+                "horario='" + horario + '\'' +
                 ", antiguedad='" + antiguedad + '\'' +
                 ", puestoTrabajo='" + puestoTrabajo + '\'' +
                 ", salario=" + salario +
-                ", cantHorasExtra=" + cantHorasExtra;
+                ", cantHorasExtra=" + cantHorasExtra +
+                '}';
     }
 }

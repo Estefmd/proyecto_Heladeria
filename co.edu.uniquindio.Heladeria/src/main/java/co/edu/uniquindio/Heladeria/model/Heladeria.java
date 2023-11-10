@@ -37,7 +37,6 @@ public class Heladeria {
         Producto producto = new Producto(sabor, tipoCono, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto);
         productosList.add(producto);
     }
-
     /**
      * Actualizar un producto existente
      */
