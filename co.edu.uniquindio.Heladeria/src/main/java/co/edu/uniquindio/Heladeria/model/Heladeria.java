@@ -16,56 +16,51 @@ public class Heladeria {
     List<Venta>ventasList = new ArrayList<Venta>();
 
     /**
-     * Crear nuevo producto
+     * Crear un nuevo producto
+     * @param sabor
+     * @param tipoCono
+     * @param adicionalTopping
+     * @param tipoProducto
+     * @param stockAlmacen
+     * @param precio
+     * @param idProducto
      */
-    public void crearProducto() {
-        String sabor = JOptionPane.showInputDialog("Ingrese el sabor del producto a registrar: ");
-        String tipoCono = JOptionPane.showInputDialog("Ingrese el tipo de cono del producto a registrar: ");
-        String adicionalTopping = JOptionPane.showInputDialog("Ingrese el topping adicional de producto a registrar: ");
-        String tipoProducto = JOptionPane.showInputDialog("Ingrese el tipo de producto a registrar: ");
-        int stockAlmacen = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad disponible del producto a registrar: "));
-        double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio de el producto: "));
-        int idProducto;
-        boolean seguir = true;
-        do{
-            idProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del producto a registrar"));
-            if(buscarProducto(idProducto)==null){
-                seguir = false;
-            }
-        }while(seguir);
-
-        Producto producto = new Producto(sabor, tipoCono, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto);
-        productosList.add(producto);
+    public void crearProducto(String sabor, String tipoCono, String adicionalTopping, String tipoProducto, int stockAlmacen, double precio, int idProducto) {
+        if (buscarProducto(idProducto) == null){
+            Producto producto = new Producto(sabor, tipoCono, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto);
+            productosList.add(producto);
+        }else{
+            JOptionPane.showMessageDialog(null,"Algo ha salido mal, intentalo de nuevo");
+        }
     }
+
     /**
      * Actualizar un producto existente
+     * @param sabor
+     * @param tipoCono
+     * @param adicionalTopping
+     * @param tipoProducto
+     * @param stockAlmacen
+     * @param precio
+     * @param idProducto
+     * @param nuevoIdProducto
      */
-    public void actualizarProducto(){
-        int idProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del producto que desea actualizar: "));
-        if (buscarProducto(idProducto)!= null){
-            int contador = 0;
-            for (Producto producto: productosList) {
-                if (producto.getIdProducto()==idProducto){
-                    String sabor = JOptionPane.showInputDialog("Ingrese el sabor del producto a registrar: ");
-                    String tipoCono = JOptionPane.showInputDialog("Ingrese el tipo de cono del producto a registrar: ");
-                    String adicionalTopping = JOptionPane.showInputDialog("Ingrese el topping adicional de producto a registrar: ");
-                    String tipoProducto = JOptionPane.showInputDialog("Ingrese el tipo de producto a registrar: ");
-                    int stockAlmacen = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad disponible del producto a registrar: "));
-                    double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio del producto: "));
-                    int nuevoIdProducto=0;
-                    boolean seguir = true;
-                    do {
-                        nuevoIdProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo ID del producto a registrar: "));
-                        if (buscarProducto(nuevoIdProducto) == null || nuevoIdProducto == producto.getIdProducto()) {
-                            seguir = false;
-                        }
-                    } while (seguir);
-                    Producto productoActualizado = new Producto(sabor, tipoCono, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto);
-                    productosList.set(contador, productoActualizado);
-                }
-            }
+    public void actualizarProducto(String sabor, String tipoCono, String adicionalTopping, String tipoProducto, int stockAlmacen, double precio, int idProducto, int nuevoIdProducto){
+        Producto producto = buscarProducto(idProducto);
+        if (producto==null){
+            JOptionPane.showMessageDialog(null,"No se ha encontrado el producto, intentelo de nuevo");
         }else{
-            JOptionPane.showMessageDialog(null, "Usuario no encontrado, intentelo nuevamente");
+            if (buscarProducto(nuevoIdProducto)==null||idProducto==nuevoIdProducto){
+                    producto.setIdProducto(nuevoIdProducto);
+                    producto.setTipoCono(tipoCono);
+                    producto.setTipoProducto(tipoProducto);
+                    producto.setSabor(sabor);
+                    producto.setAdicionalTopping(adicionalTopping);
+                    producto.setPrecioTotal(precio);
+                    producto.setStockAlmacen(stockAlmacen);
+            }else{
+                JOptionPane.showMessageDialog(null, "Es posible que ya haya un producto registrgado con el nuevo id, intentelo nuevamente");
+            }
         }
     }
 

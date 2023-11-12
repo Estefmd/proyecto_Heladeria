@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d6039f91-7a26-4f5f-86f2-1feaf2a0cfe1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,9 +16,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2WofJ5nwM7W0zw2khUaqBzQ7Cyp" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,7 +31,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "dev-programacion",
-    "last_opened_file_path": "C:/Users/Asus/Desktop/Ing. sistemas/Semestre 2/Programacion_1/proyecto_Heladeria",
+    "last_opened_file_path": "C:/Users/PC/Desktop/Programacion_1/Heladeria/proyecto_Heladeria/co.edu.uniquindio.Heladeria",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
