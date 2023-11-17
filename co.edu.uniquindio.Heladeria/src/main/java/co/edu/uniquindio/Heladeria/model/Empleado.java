@@ -1,23 +1,23 @@
 package co.edu.uniquindio.Heladeria.model;
 
+import co.edu.uniquindio.Heladeria.enumeraciones.PuestoTrabajo;
+
 public class Empleado extends Persona{
     private String horario;
-    private String antiguedad;
-    private String puestoTrabajo;
+    private int antiguedad;
+    private PuestoTrabajo puestoTrabajo;
     private double salario;
-    private int cantHorasExtra;
     private Heladeria ownedByHeladeria;
 
     public Empleado() {
     }
-    public Empleado(String nombre, String apellido, int documento, int edad, String horario, String antiguedad, String puestoTrabajo, double salario, int cantHorasExtra, Heladeria ownedByHeladeria) {
+
+    public Empleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, PuestoTrabajo puestoTrabajo, double salario, Heladeria ownedByHeladeria) {
         super(nombre, apellido, documento, edad);
         this.horario = horario;
         this.antiguedad = antiguedad;
         this.puestoTrabajo = puestoTrabajo;
         this.salario = salario;
-        this.cantHorasExtra = cantHorasExtra;
-        this.ownedByHeladeria = ownedByHeladeria;
     }
 
     public Heladeria getOwnedByHeladeria() {
@@ -35,19 +35,19 @@ public class Empleado extends Persona{
         this.horario = horario;
     }
 
-    public String getAntiguedad() {
+    public int getAntiguedad() {
         return antiguedad;
     }
 
-    public void setAntiguedad(String antiguedad) {
+    public void setAntiguedad(int antiguedad) {
         this.antiguedad = antiguedad;
     }
 
-    public String getPuestoTrabajo() {
+    public PuestoTrabajo getPuestoTrabajo() {
         return puestoTrabajo;
     }
 
-    public void setPuestoTrabajo(String puestoTrabajo) {
+    public void setPuestoTrabajo(PuestoTrabajo puestoTrabajo) {
         this.puestoTrabajo = puestoTrabajo;
     }
 
@@ -59,14 +59,6 @@ public class Empleado extends Persona{
         this.salario = salario;
     }
 
-    public int getCantHorasExtra() {
-        return cantHorasExtra;
-    }
-
-    public void setCantHorasExtra(int cantHorasExtra) {
-        this.cantHorasExtra = cantHorasExtra;
-    }
-
     @Override
     public String toString() {
         return "Empleado{" +
@@ -74,7 +66,6 @@ public class Empleado extends Persona{
                 ", antiguedad='" + antiguedad + '\'' +
                 ", puestoTrabajo='" + puestoTrabajo + '\'' +
                 ", salario=" + salario +
-                ", cantHorasExtra=" + cantHorasExtra +
                 '}';
     }
 }

@@ -6,27 +6,22 @@ public class Main {
     public static void main(String[] args) {
 
         Heladeria heladeria = inicializarDatos("nombre");
-        int opcion = 0;
-        do {
-            opcion = heladeria.menuProducto();
-            switch (opcion){
-                case 1:
-                    crearProducto(heladeria);
-                    break;
-                case 2:
-                    actualizarProducto(heladeria);
-                    break;
-                case 3:
-                    mostrarProductos(heladeria);
-                    break;
-                case 4:
-                    eliminarProducto(heladeria);
-                    break;
-                case 5:
-                    JOptionPane.showMessageDialog(null, "Gracias por utilizar el programa");
-                    break;
-            }
-        } while (opcion != 5);
+        mostrarMeunProducto(heladeria);
+
+        crearEmpleado(heladeria);
+    }
+
+    private static void crearEmpleado(Heladeria heladeria) {
+        String nombre = JOptionPane.showInputDialog("Ingrese el nombre del empleado que desea registrar");
+        String apellido = JOptionPane.showInputDialog("Ingrese el apellido del empleado que desea registrar");
+        int documento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del empleado que desea registrar"));
+        int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del empleado que desea registrar"));
+        String horario = JOptionPane.showInputDialog("Ingrese el horario del empleado que desea registrar");
+        int antiguedad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la antiguedad del empleado que desea registrar (en años)"));
+        String puestoTrabajo = JOptionPane.showInputDialog("Ingrese el puesto de trabajo del empleado que desea registrar");
+        double salario = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el salario del empleado que desea registrar"));
+
+        heladeria.crearEmpleado( nombre,  apellido,  documento,  edad, horario, antiguedad, puestoTrabajo, salario);
     }
 
     private static Heladeria inicializarDatos(String nombre) {
@@ -64,5 +59,29 @@ public class Main {
         double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio de el producto: "));
         int  idProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del producto a registrar"));
         heladeria.crearProducto(sabor, tipoCono, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto);
+    }
+
+    public static void mostrarMeunProducto(Heladeria heladeria){
+        int opcion = 0;
+        do {
+            opcion = heladeria.menuProducto();
+            switch (opcion){
+                case 1:
+                    crearProducto(heladeria);
+                    break;
+                case 2:
+                    actualizarProducto(heladeria);
+                    break;
+                case 3:
+                    mostrarProductos(heladeria);
+                    break;
+                case 4:
+                    eliminarProducto(heladeria);
+                    break;
+                case 5:
+                    JOptionPane.showMessageDialog(null, "Gracias por utilizar el programa");
+                    break;
+            }
+        } while (opcion != 5);
     }
 }

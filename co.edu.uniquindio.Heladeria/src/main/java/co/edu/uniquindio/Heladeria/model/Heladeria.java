@@ -115,4 +115,31 @@ public class Heladeria {
         int opcion = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
         return opcion;
     }
+
+
+    public void crearEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, String puestoTrabajo, double salario) {
+        if (buscarEmpleado(documento) != null){
+            JOptionPane.showMessageDialog(null, "Es posible que exista un empleado con este documento, intentelo nuevamente");
+        }else {
+            Empleado empleado = new Empleado();
+            empleado.setNombre(nombre);
+            empleado.setApellido(apellido);
+            empleado.setAntiguedad(antiguedad);
+            empleado.setDocumento(documento);
+            empleado.setEdad(edad);
+            empleado.setHorario(horario);
+            empleado.setSalario(salario);
+            empleadosList.add(empleado);
+            JOptionPane.showMessageDialog(null, "El empleado ha sido creado con Exito!");
+        }
+    }
+
+    public Empleado buscarEmpleado(int documento){
+        for (Empleado empleado : empleadosList) {
+            if (empleado.getDocumento() == documento){
+              return empleado;
+            }
+        }
+        return null;
+    }
 }
