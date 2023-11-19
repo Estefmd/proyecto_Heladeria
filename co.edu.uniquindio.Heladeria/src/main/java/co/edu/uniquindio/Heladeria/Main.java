@@ -7,9 +7,10 @@ public class Main {
 
         Heladeria heladeria = inicializarDatos("nombre");
         mostrarMeunProducto(heladeria);
-
-        crearEmpleado(heladeria);
+        mostrarMeunEmpleado(heladeria);
     }
+
+
 
     private static void crearEmpleado(Heladeria heladeria) {
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre del empleado que desea registrar");
@@ -18,10 +19,39 @@ public class Main {
         int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del empleado que desea registrar"));
         String horario = JOptionPane.showInputDialog("Ingrese el horario del empleado que desea registrar");
         int antiguedad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la antiguedad del empleado que desea registrar (en años)"));
-        String puestoTrabajo = JOptionPane.showInputDialog("Ingrese el puesto de trabajo del empleado que desea registrar");
         double salario = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el salario del empleado que desea registrar"));
+        int puestoTrabajo;
+        do {
+            puestoTrabajo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el puesto de trabajo del empleado que desea registrar \n 1. Cajera \n 2. Mesera \n 3. Vendedora"));
+        }while(puestoTrabajo!=1 && puestoTrabajo!=2 && puestoTrabajo!=3);
 
         heladeria.crearEmpleado( nombre,  apellido,  documento,  edad, horario, antiguedad, puestoTrabajo, salario);
+    }
+
+    private static void actualizarEmpleado(Heladeria heladeria) {
+        int documento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del empleado que desea actualizar"));
+        int nuevoDocumento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo documento del empleado que desea actualizar (este puede ser el mismo)"));
+        String nombre = JOptionPane.showInputDialog("Ingrese nuevo el nombre del empleado que desea actualizar");
+        String apellido = JOptionPane.showInputDialog("Ingrese el nuevo apellido del empleado que desea actualizar");
+        int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva edad del empleado que desea actualizar"));
+        String horario = JOptionPane.showInputDialog("Ingrese el nuevo horario del empleado que desea actualizar");
+        int antiguedad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la antiguedad del empleado que desea actualizar (en años)"));
+        double salario = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el nuevo salario del empleado que desea actualizar"));
+        int puestoTrabajo;
+        do {
+            puestoTrabajo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el puesto de trabajo del empleado que desea registrar \n 1. Cajera \n 2. Mesera \n 3. Vendedora"));
+        }while(puestoTrabajo!=1 && puestoTrabajo!=2 && puestoTrabajo!=3);
+
+        heladeria.actualizarEmpleado( nombre,  apellido,  documento,  edad, horario, antiguedad, puestoTrabajo, salario, nuevoDocumento);
+    }
+
+    private static void eliminarEmpleado(Heladeria heladeria) {
+        int idEmpleado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del empleado que desea eliminar: "));
+        heladeria.eliminarEmpleado(idEmpleado);
+    }
+
+    private static void mostrarEmpleados(Heladeria heladeria) {
+        heladeria.mostrarEmpleados();
     }
 
     private static Heladeria inicializarDatos(String nombre) {
@@ -35,7 +65,8 @@ public class Main {
         heladeria.mostrarProductos();
     }
     private static void eliminarProducto(Heladeria heladeria) {
-        heladeria.eliminarProducto();
+        int idProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del producto que desea eliminar: "));
+        heladeria.eliminarProducto(idProducto);
     }
 
     private static void actualizarProducto(Heladeria heladeria) {
@@ -77,6 +108,30 @@ public class Main {
                     break;
                 case 4:
                     eliminarProducto(heladeria);
+                    break;
+                case 5:
+                    JOptionPane.showMessageDialog(null, "Gracias por utilizar el programa");
+                    break;
+            }
+        } while (opcion != 5);
+    }
+
+    public static void mostrarMeunEmpleado(Heladeria heladeria){
+        int opcion = 0;
+        do {
+            opcion = heladeria.menuEmpleado();
+            switch (opcion){
+                case 1:
+                    crearEmpleado(heladeria);
+                    break;
+                case 2:
+                    actualizarEmpleado(heladeria);
+                    break;
+                case 3:
+                    mostrarEmpleados(heladeria);
+                    break;
+                case 4:
+                    eliminarEmpleado(heladeria);
                     break;
                 case 5:
                     JOptionPane.showMessageDialog(null, "Gracias por utilizar el programa");

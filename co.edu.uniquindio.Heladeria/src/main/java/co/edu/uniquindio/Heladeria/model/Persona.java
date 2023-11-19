@@ -1,10 +1,10 @@
 package co.edu.uniquindio.Heladeria.model;
 
 public abstract class  Persona {
-    private String nombre;
-    private String apellido;
-    private int documento;
-    private int edad;
+    String nombre;
+    String apellido;
+    int documento;
+    int edad;
 
     public Persona(){
     }

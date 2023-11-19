@@ -1,5 +1,7 @@
 package co.edu.uniquindio.Heladeria.model;
 
+import co.edu.uniquindio.Heladeria.enumeraciones.PuestoTrabajo;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,8 +93,7 @@ public class Heladeria {
     /**
      * Eliminar producto existente
      */
-    public void eliminarProducto() {
-        int idProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del producto que desea eliminar: "));
+    public void eliminarProducto(int idProducto) {
         Producto productoAEliminar = buscarProducto(idProducto);
         if (productoAEliminar == null) {
             JOptionPane.showMessageDialog(null, "Producto no encontrado");
@@ -117,7 +118,7 @@ public class Heladeria {
     }
 
 
-    public void crearEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, String puestoTrabajo, double salario) {
+    public void crearEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, int puestoTrabajo, double salario) {
         if (buscarEmpleado(documento) != null){
             JOptionPane.showMessageDialog(null, "Es posible que exista un empleado con este documento, intentelo nuevamente");
         }else {
@@ -129,8 +130,56 @@ public class Heladeria {
             empleado.setEdad(edad);
             empleado.setHorario(horario);
             empleado.setSalario(salario);
+
+            switch (puestoTrabajo){
+                case 1:
+                    empleado.setPuestoTrabajo(PuestoTrabajo.CAJERA);
+                    break;
+                case 2:
+                    empleado.setPuestoTrabajo(PuestoTrabajo.MESERA);
+                    break;
+                case 3:
+                    empleado.setPuestoTrabajo(PuestoTrabajo.VENDEDORA);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "La opcion ingresada no es valida. Intente nuevamente");
+            }
             empleadosList.add(empleado);
             JOptionPane.showMessageDialog(null, "El empleado ha sido creado con Exito!");
+        }
+    }
+
+    public void actualizarEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, int puestoTrabajo, double salario, int nuevoIdEmpleado) {
+        Empleado empleado = buscarEmpleado(documento);
+        if (empleado==null){
+            JOptionPane.showMessageDialog(null,"No se ha encontrado el empleado, intentelo de nuevo");
+        }else{
+            if (buscarProducto(nuevoIdEmpleado)==null||documento==nuevoIdEmpleado){
+                empleado.setNombre(nombre);
+                empleado.setApellido(apellido);
+                empleado.setAntiguedad(antiguedad);
+                empleado.setDocumento(nuevoIdEmpleado);
+                empleado.setEdad(edad);
+                empleado.setHorario(horario);
+                empleado.setSalario(salario);
+
+                switch (puestoTrabajo){
+                    case 1:
+                        empleado.setPuestoTrabajo(PuestoTrabajo.CAJERA);
+                        break;
+                    case 2:
+                        empleado.setPuestoTrabajo(PuestoTrabajo.MESERA);
+                        break;
+                    case 3:
+                        empleado.setPuestoTrabajo(PuestoTrabajo.VENDEDORA);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "La opcion ingresada no es valida. Intente nuevamente");
+                }
+                JOptionPane.showMessageDialog(null, "El empleado ha sido actualizado con Exito!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Es posible que ya haya un empleado registrgado con el nuevo documento, intentelo nuevamente");
+            }
         }
     }
 
@@ -141,5 +190,33 @@ public class Heladeria {
             }
         }
         return null;
+    }
+
+    public void eliminarEmpleado(int idEmpleado) {
+        Empleado empleadoEliminar = buscarEmpleado(idEmpleado);
+        if (empleadoEliminar == null) {
+            JOptionPane.showMessageDialog(null, "Empleado no encontrado");
+        } else {
+            empleadosList.remove(empleadoEliminar);
+        }
+    }
+
+    public void mostrarEmpleados(){
+        String mensaje = "";
+        for (Empleado empleado:empleadosList) {
+            mensaje += empleado.toString() +"\n___________\n";
+        }
+        JOptionPane.showMessageDialog(null,mensaje);
+    }
+
+    public int menuEmpleado(){
+        String mensaje = "Seleccione una opcion: \n"+
+                "1. Crear empleado. \n"+
+                "2. Actualizar empleado. \n"+
+                "3. Listar empleados. \n"+
+                "4. Elimiar empleado. \n"+
+                "5. Salir \n";
+        int opcion = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+        return opcion;
     }
 }
