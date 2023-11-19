@@ -1,25 +1,26 @@
 package co.edu.uniquindio.Heladeria.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Cliente extends Persona{
-    private Date fechaCompra;
+    private LocalDate fechaCompra;
 
     private Heladeria ownedByHeladeria;
 
     public Cliente() {
     }
-    public Cliente(String nombre, String apellido, int documento, int edad, Date fechaCompra, Heladeria ownedByHeladeria) {
+    public Cliente(String nombre, String apellido, int documento, int edad, LocalDate fechaCompra, Heladeria ownedByHeladeria) {
         super(nombre, apellido, documento, edad);
         this.fechaCompra = fechaCompra;
         this.ownedByHeladeria = ownedByHeladeria;
     }
 
-    public Date getFechaCompra() {
+    public LocalDate getFechaCompra() {
         return fechaCompra;
     }
 
-    public void setFechaCompra(Date fechaCompra) {
+    public void setFechaCompra(LocalDate fechaCompra) {
         this.fechaCompra = fechaCompra;
     }
 

@@ -8,8 +8,39 @@ public class Main {
         Heladeria heladeria = inicializarDatos("nombre");
         mostrarMeunProducto(heladeria);
         mostrarMeunEmpleado(heladeria);
+        mostrarMeunCliente(heladeria);
+
     }
 
+
+
+    private static void crearCliente(Heladeria heladeria) {
+        String nombre = JOptionPane.showInputDialog("Ingrese el nombre del cliente que desea registrar");
+        String apellido = JOptionPane.showInputDialog("Ingrese el apellido del cliente que desea registrar");
+        int documento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del cliente que desea registrar"));
+        int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del cliente que desea registrar"));
+        String fechaCompra = JOptionPane.showInputDialog("Ingrese la fecha de compra (año-mes-dia)");
+        heladeria.crearCliente(nombre, apellido, documento, edad, fechaCompra);
+    }
+
+    private static void actualizarCliente(Heladeria heladeria) {
+        int documento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del cliente que desea actualizar"));
+        int nuevoDocumento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo documento del cliente"));
+        String nombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del cliente");
+        String apellido = JOptionPane.showInputDialog("Ingrese el nuevo apellido del cliente");
+        int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva edad del cliente"));
+        String fechaCompra = JOptionPane.showInputDialog("Ingrese la nueva fecha de compra (año-mes-dia)");
+        heladeria.actualizarCliente(nombre, apellido, documento, edad, fechaCompra, nuevoDocumento);
+    }
+
+    private static void eliminarCliente(Heladeria heladeria) {
+        int idCliente = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del cliente que desea eliminar: "));
+        heladeria.eliminarCliente(idCliente);
+    }
+
+    private static void mostrarClientes(Heladeria heladeria) {
+        heladeria.mostrarClientes();
+    }
 
 
     private static void crearEmpleado(Heladeria heladeria) {
@@ -139,4 +170,31 @@ public class Main {
             }
         } while (opcion != 5);
     }
+
+    public static void mostrarMeunCliente(Heladeria heladeria){
+        int opcion = 0;
+        do {
+            opcion = heladeria.menuCliente();
+            switch (opcion){
+                case 1:
+                    crearCliente(heladeria);
+                    break;
+                case 2:
+                    actualizarCliente(heladeria);
+                    break;
+                case 3:
+                    mostrarClientes(heladeria);
+                    break;
+                case 4:
+                    eliminarCliente(heladeria);
+                    break;
+                case 5:
+                    JOptionPane.showMessageDialog(null, "Gracias por utilizar el programa");
+                    break;
+            }
+        } while (opcion != 5);
+    }
 }
+
+
+

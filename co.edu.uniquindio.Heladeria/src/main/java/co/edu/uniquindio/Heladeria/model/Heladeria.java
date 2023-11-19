@@ -3,8 +3,12 @@ package co.edu.uniquindio.Heladeria.model;
 import co.edu.uniquindio.Heladeria.enumeraciones.PuestoTrabajo;
 
 import javax.swing.*;
+import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Heladeria {
     private String nombre;
@@ -16,6 +20,9 @@ public class Heladeria {
     List<Empleado>empleadosList = new ArrayList<Empleado>();
     List<Cliente>clientesList = new ArrayList<Cliente>();
     List<Venta>ventasList = new ArrayList<Venta>();
+
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
     /**
      * Crear un nuevo producto
@@ -32,7 +39,7 @@ public class Heladeria {
             Producto producto = new Producto(sabor, tipoCono, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto);
             productosList.add(producto);
         }else{
-            JOptionPane.showMessageDialog(null,"Algo ha salido mal, intentalo de nuevo");
+            JOptionPane.showMessageDialog(null,"Algo ha salido mal, intentalo de nuevo",  "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -50,7 +57,7 @@ public class Heladeria {
     public void actualizarProducto(String sabor, String tipoCono, String adicionalTopping, String tipoProducto, int stockAlmacen, double precio, int idProducto, int nuevoIdProducto){
         Producto producto = buscarProducto(idProducto);
         if (producto==null){
-            JOptionPane.showMessageDialog(null,"No se ha encontrado el producto, intentelo de nuevo");
+            JOptionPane.showMessageDialog(null,"No se ha encontrado el producto, intentelo de nuevo",  "Error!", JOptionPane.ERROR_MESSAGE);
         }else{
             if (buscarProducto(nuevoIdProducto)==null||idProducto==nuevoIdProducto){
                     producto.setIdProducto(nuevoIdProducto);
@@ -61,7 +68,8 @@ public class Heladeria {
                     producto.setPrecioTotal(precio);
                     producto.setStockAlmacen(stockAlmacen);
             }else{
-                JOptionPane.showMessageDialog(null, "Es posible que ya haya un producto registrgado con el nuevo id, intentelo nuevamente");
+                JOptionPane.showMessageDialog(null, "Es posible que ya haya un producto registrgado con el nuevo id, intentelo nuevamente",  "Error!", JOptionPane.ERROR_MESSAGE);
+
             }
         }
     }
@@ -96,7 +104,7 @@ public class Heladeria {
     public void eliminarProducto(int idProducto) {
         Producto productoAEliminar = buscarProducto(idProducto);
         if (productoAEliminar == null) {
-            JOptionPane.showMessageDialog(null, "Producto no encontrado");
+            JOptionPane.showMessageDialog(null, "Producto no encontrado",  "Error!", JOptionPane.ERROR_MESSAGE);
         } else {
             productosList.remove(productoAEliminar);
             JOptionPane.showMessageDialog(null, "Producto eliminado con exito");
@@ -133,7 +141,8 @@ public class Heladeria {
      */
     public void crearEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, int puestoTrabajo, double salario) {
         if (buscarEmpleado(documento) != null){
-            JOptionPane.showMessageDialog(null, "Es posible que exista un empleado con este documento, intentelo nuevamente");
+            JOptionPane.showMessageDialog(null, "Es posible que exista un empleado con este documento, intentelo nuevamente",  "Error!", JOptionPane.ERROR_MESSAGE);
+
         }else {
             Empleado empleado = new Empleado();
             empleado.setNombre(nombre);
@@ -155,7 +164,7 @@ public class Heladeria {
                     empleado.setPuestoTrabajo(PuestoTrabajo.VENDEDORA);
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "La opcion ingresada no es valida. Intente nuevamente");
+                    JOptionPane.showMessageDialog(null, "La opcion ingresada no es valida. Intente nuevamente", "Error!", JOptionPane.ERROR_MESSAGE);
             }
             empleadosList.add(empleado);
             JOptionPane.showMessageDialog(null, "El empleado ha sido creado con Exito!");
@@ -177,7 +186,7 @@ public class Heladeria {
     public void actualizarEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, int puestoTrabajo, double salario, int nuevoIdEmpleado) {
         Empleado empleado = buscarEmpleado(documento);
         if (empleado==null){
-            JOptionPane.showMessageDialog(null,"No se ha encontrado el empleado, intentelo de nuevo");
+            JOptionPane.showMessageDialog(null,"No se ha encontrado el empleado, intentelo de nuevo",  "Error!", JOptionPane.ERROR_MESSAGE);
         }else{
             if (buscarProducto(nuevoIdEmpleado)==null||documento==nuevoIdEmpleado){
                 empleado.setNombre(nombre);
@@ -199,11 +208,11 @@ public class Heladeria {
                         empleado.setPuestoTrabajo(PuestoTrabajo.VENDEDORA);
                         break;
                     default:
-                        JOptionPane.showMessageDialog(null, "La opcion ingresada no es valida. Intente nuevamente");
+                        JOptionPane.showMessageDialog(null, "La opcion ingresada no es valida. Intente nuevamente",  "Error!", JOptionPane.ERROR_MESSAGE);
                 }
                 JOptionPane.showMessageDialog(null, "El empleado ha sido actualizado con Exito!");
             }else{
-                JOptionPane.showMessageDialog(null, "Es posible que ya haya un empleado registrgado con el nuevo documento, intentelo nuevamente");
+                JOptionPane.showMessageDialog(null, "Es posible que ya haya un empleado registrgado con el nuevo documento, intentelo nuevamente",  "Error!", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -229,7 +238,7 @@ public class Heladeria {
     public void eliminarEmpleado(int idEmpleado) {
         Empleado empleadoEliminar = buscarEmpleado(idEmpleado);
         if (empleadoEliminar == null) {
-            JOptionPane.showMessageDialog(null, "Empleado no encontrado");
+            JOptionPane.showMessageDialog(null, "Empleado no encontrado",  "Error!", JOptionPane.ERROR_MESSAGE);
         } else {
             empleadosList.remove(empleadoEliminar);
             JOptionPane.showMessageDialog(null, "Empleado eliminado con exito");
@@ -270,17 +279,15 @@ public class Heladeria {
         }
         JOptionPane.showMessageDialog(null,mensaje);
     }
-
     public void eliminarCliente(int idCliente) {
         Cliente clienteEliminar = buscarCliente(idCliente);
         if (clienteEliminar == null) {
-            JOptionPane.showMessageDialog(null, "Cliente no encontrado");
+            JOptionPane.showMessageDialog(null, "Cliente no encontrado",  "Error!", JOptionPane.ERROR_MESSAGE);
         } else {
-            empleadosList.remove(clienteEliminar);
+            clientesList.remove(clienteEliminar);
             JOptionPane.showMessageDialog(null, "Cliente eliminado con exito");
         }
     }
-
     private Cliente buscarCliente(int idCliente) {
         for (Cliente cliente : clientesList) {
             if (cliente.getDocumento() == idCliente){
@@ -288,5 +295,60 @@ public class Heladeria {
             }
         }
         return null;
+    }
+    public void crearCliente(String nombre, String apellido, int documento, int edad, String fechaCompra) {
+        if (buscarCliente(documento) == null) {
+            Cliente cliente = new Cliente();
+            cliente.setNombre(nombre);
+            cliente.setApellido(apellido);
+            cliente.setDocumento(documento);
+            cliente.setEdad(edad);
+
+            LocalDate fechaConvertida;
+            try {
+                fechaConvertida = LocalDate.parse(fechaCompra, formato);
+                cliente.setFechaCompra(fechaConvertida);
+                JOptionPane.showMessageDialog(null, "El cliente ha sido creado con éxito!");
+                clientesList.add(cliente);
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Algo ha salido mal con la fecha, inténtelo nuevamente", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Algo ha salido mal, intentelo nuevamente.","Error!", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void actualizarCliente(String nombre, String apellido, int documento, int edad, String fechaCompra, int nuevoDocumento) {
+        Cliente cliente = buscarCliente(documento);
+        if (cliente==null){
+            JOptionPane.showMessageDialog(null,"No se ha encontrado el cliente, intentelo de nuevo",  "Error!", JOptionPane.ERROR_MESSAGE);
+        }else{
+            if (buscarCliente(nuevoDocumento)==null||documento==nuevoDocumento){
+                cliente.setNombre(nombre);
+                cliente.setApellido(apellido);
+                cliente.setDocumento(nuevoDocumento);
+                cliente.setEdad(edad);
+                LocalDate fechaConvertida;
+                try {
+                    fechaConvertida = LocalDate.parse(fechaCompra, formato);
+                    cliente.setFechaCompra(fechaConvertida);
+                    JOptionPane.showMessageDialog(null, "El cliente ha sido actualizado con Exito!");
+                } catch (DateTimeParseException e) {
+                    JOptionPane.showMessageDialog(null, "Algo ha salido mal con la fecha, inténtelo nuevamente", "Error!", JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Es posible que ya haya un cliente registrgado con el nuevo documento, intentelo nuevamente",  "Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    public int menuCliente(){
+        String mensaje = "Seleccione una opcion: \n"+
+                "1. Crear cliente. \n"+
+                "2. Actualizar cliente. \n"+
+                "3. Listar cliente. \n"+
+                "4. Elimiar cliente. \n"+
+                "5. Salir \n";
+        int opcion = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+        return opcion;
     }
 }
