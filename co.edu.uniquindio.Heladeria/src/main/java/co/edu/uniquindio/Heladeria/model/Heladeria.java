@@ -99,6 +99,7 @@ public class Heladeria {
             JOptionPane.showMessageDialog(null, "Producto no encontrado");
         } else {
             productosList.remove(productoAEliminar);
+            JOptionPane.showMessageDialog(null, "Producto eliminado con exito");
         }
     }
 
@@ -117,7 +118,19 @@ public class Heladeria {
         return opcion;
     }
 
+    //CRUD EMPLEADO
 
+    /**
+     * Funcion para crear un empleado
+     * @param nombre
+     * @param apellido
+     * @param documento
+     * @param edad
+     * @param horario
+     * @param antiguedad
+     * @param puestoTrabajo
+     * @param salario
+     */
     public void crearEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, int puestoTrabajo, double salario) {
         if (buscarEmpleado(documento) != null){
             JOptionPane.showMessageDialog(null, "Es posible que exista un empleado con este documento, intentelo nuevamente");
@@ -149,6 +162,18 @@ public class Heladeria {
         }
     }
 
+    /**
+     * Actualizar un empleado existente
+     * @param nombre
+     * @param apellido
+     * @param documento
+     * @param edad
+     * @param horario
+     * @param antiguedad
+     * @param puestoTrabajo
+     * @param salario
+     * @param nuevoIdEmpleado
+     */
     public void actualizarEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, int puestoTrabajo, double salario, int nuevoIdEmpleado) {
         Empleado empleado = buscarEmpleado(documento);
         if (empleado==null){
@@ -183,6 +208,11 @@ public class Heladeria {
         }
     }
 
+    /**
+     * Buscar empleado
+     * @param documento
+     * @return
+     */
     public Empleado buscarEmpleado(int documento){
         for (Empleado empleado : empleadosList) {
             if (empleado.getDocumento() == documento){
@@ -192,15 +222,24 @@ public class Heladeria {
         return null;
     }
 
+    /**
+     * eliminar empleado
+     * @param idEmpleado
+     */
     public void eliminarEmpleado(int idEmpleado) {
         Empleado empleadoEliminar = buscarEmpleado(idEmpleado);
         if (empleadoEliminar == null) {
             JOptionPane.showMessageDialog(null, "Empleado no encontrado");
         } else {
             empleadosList.remove(empleadoEliminar);
+            JOptionPane.showMessageDialog(null, "Empleado eliminado con exito");
+
         }
     }
 
+    /**
+     * Mostrar lista empleados
+     */
     public void mostrarEmpleados(){
         String mensaje = "";
         for (Empleado empleado:empleadosList) {
@@ -209,6 +248,10 @@ public class Heladeria {
         JOptionPane.showMessageDialog(null,mensaje);
     }
 
+    /**
+     * Menu emplead
+     * @return
+     */
     public int menuEmpleado(){
         String mensaje = "Seleccione una opcion: \n"+
                 "1. Crear empleado. \n"+
@@ -218,5 +261,32 @@ public class Heladeria {
                 "5. Salir \n";
         int opcion = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
         return opcion;
+    }
+
+    public void mostrarClientes(){
+        String mensaje = "";
+        for (Cliente cliente:clientesList) {
+            mensaje += cliente.toString() +"\n___________\n";
+        }
+        JOptionPane.showMessageDialog(null,mensaje);
+    }
+
+    public void eliminarCliente(int idCliente) {
+        Cliente clienteEliminar = buscarCliente(idCliente);
+        if (clienteEliminar == null) {
+            JOptionPane.showMessageDialog(null, "Cliente no encontrado");
+        } else {
+            empleadosList.remove(clienteEliminar);
+            JOptionPane.showMessageDialog(null, "Cliente eliminado con exito");
+        }
+    }
+
+    private Cliente buscarCliente(int idCliente) {
+        for (Cliente cliente : clientesList) {
+            if (cliente.getDocumento() == idCliente){
+                return cliente;
+            }
+        }
+        return null;
     }
 }
