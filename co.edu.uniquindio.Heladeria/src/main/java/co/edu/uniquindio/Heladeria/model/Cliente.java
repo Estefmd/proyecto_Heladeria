@@ -1,12 +1,13 @@
 package co.edu.uniquindio.Heladeria.model;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Cliente extends Persona{
     private LocalDate fechaCompra;
-
     private Heladeria ownedByHeladeria;
+    private List<Venta> ventasAsociadas = new ArrayList<>();
 
     public Cliente() {
     }
@@ -32,12 +33,21 @@ public class Cliente extends Persona{
         this.ownedByHeladeria = ownedByHeladeria;
     }
 
+    public List<Venta> getVentasAsociadas() {
+        return ventasAsociadas;
+    }
+
+    public void setVentasAsociadas(List<Venta> ventasAsociadas) {
+        this.ventasAsociadas = ventasAsociadas;
+    }
+
     public String toString() {
         return
                 "nombre: " + nombre + '\n'+
                 "apellido:" + apellido + '\n' +
                 "documento:" + documento + '\n'+
                 "edad:" + edad + '\n'+
-                "fecha de compra: " +fechaCompra;
+                "fecha de compra: " +fechaCompra + '\n'+
+                "ventas asociadas: "+ventasAsociadas.size();
     }
 }

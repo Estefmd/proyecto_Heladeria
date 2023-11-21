@@ -351,4 +351,58 @@ public class Heladeria {
         int opcion = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
         return opcion;
     }
+
+    // Metodos clase Venta
+    public void crearVenta(int idVenta, int idEmpleadoAsociado, int idClienteAsociado, int idProductoAsociado){
+        Empleado empleadoAsociado;
+        Cliente clienteAsociado;
+        Producto productoAsociado;
+
+        if (buscarVenta(idVenta) == null){
+            empleadoAsociado = buscarEmpleado(idEmpleadoAsociado);
+            clienteAsociado = buscarCliente(idClienteAsociado);
+            productoAsociado = buscarProducto(idProductoAsociado);
+
+            if (empleadoAsociado == null || clienteAsociado == null || productoAsociado == null){
+                JOptionPane.showMessageDialog(null, "Alguno de los Id ingresados no se encuentra en el sistema");
+            }else{
+                Venta venta = new Venta(idVenta,empleadoAsociado,clienteAsociado,productoAsociado);
+                ventasList.add(venta);
+                empleadoAsociado.getVentasAsociadas().add(venta);
+                clienteAsociado.getVentasAsociadas().add(venta);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Ya se encuentra registrada una venta con este ID");
+        }
+    }
+    public Venta buscarVenta(int idVenta){
+        for (Venta venta : ventasList) {
+            if (venta.getIdVenta() == idVenta){
+                return venta;
+            }
+        }
+        return null;
+    }
+    public void eliminarVenta(int idVenta) {
+
+        Venta venta = buscarVenta(idVenta);
+
+        if (venta == null) {
+            JOptionPane.showMessageDialog(null, "La venta no fue encontrada");
+        } else {
+            venta.getClienteAsociado().getVentasAsociadas().remove(venta);
+            venta.getEmpleadoAsociado().getVentasAsociadas().remove(venta);
+            ventasList.remove(venta);
+
+            JOptionPane.showMessageDialog(null, "Venta eliminada exitosamente!");
+        }
+    }
+    public void mostrarVentas(){
+        String mensaje = "";
+        for (Venta venta : ventasList) {
+            mensaje += venta.toString();
+        }
+        JOptionPane.showMessageDialog(null,mensaje);
+    }
+
 }

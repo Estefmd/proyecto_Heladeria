@@ -2,12 +2,16 @@ package co.edu.uniquindio.Heladeria.model;
 
 import co.edu.uniquindio.Heladeria.enumeraciones.PuestoTrabajo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Empleado extends Persona{
     private String horario;
     private int antiguedad;
     private PuestoTrabajo puestoTrabajo;
     private double salario;
     private Heladeria ownedByHeladeria;
+    private List<Venta> ventasAsociadas = new ArrayList<>();
 
     public Empleado() {
     }
@@ -59,6 +63,14 @@ public class Empleado extends Persona{
         this.salario = salario;
     }
 
+    public List<Venta> getVentasAsociadas() {
+        return ventasAsociadas;
+    }
+
+    public void setVentasAsociadas(List<Venta> ventasAsociadas) {
+        this.ventasAsociadas = ventasAsociadas;
+    }
+
     @Override
     public String toString() {
         return
@@ -69,6 +81,7 @@ public class Empleado extends Persona{
                 "horario:'" + horario + '\n'+
                 "antiguedad:" + antiguedad + '\n'+
                 "puestoTrabajo:" + puestoTrabajo + '\n'+
-                "salario:" + salario;
+                "salario:" + salario + '\n'+
+                "ventas asociadas: "+ventasAsociadas.size();
     }
 }
