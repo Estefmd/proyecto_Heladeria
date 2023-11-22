@@ -34,13 +34,16 @@ public class Heladeria {
      * @param stockAlmacen
      * @param precio
      * @param idProducto
+     * @param heladeria
+     * @return boolean
      */
-    public void crearProducto(String sabor, String nombre, String adicionalTopping, String tipoProducto, int stockAlmacen, double precio, int idProducto, Heladeria heladeria) {
+    public boolean crearProducto(String sabor, String nombre, String adicionalTopping, String tipoProducto, int stockAlmacen, double precio, int idProducto, Heladeria heladeria) {
         if (buscarProducto(idProducto, heladeria) == null){
             Producto producto = new Producto(sabor, nombre, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto, heladeria);
             heladeria.productosList.add(producto);
+            return true;
         }else{
-            JOptionPane.showMessageDialog(null,"Algo ha salido mal, intentalo de nuevo",  "Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 
@@ -54,11 +57,13 @@ public class Heladeria {
      * @param precio
      * @param idProducto
      * @param nuevoIdProducto
+     * @param heladeria
+     * @return boolean
      */
-    public void actualizarProducto(String sabor, String nombre, String adicionalTopping, String tipoProducto, int stockAlmacen, double precio, int idProducto, int nuevoIdProducto, Heladeria heladeria){
+    public boolean actualizarProducto(String sabor, String nombre, String adicionalTopping, String tipoProducto, int stockAlmacen, double precio, int idProducto, int nuevoIdProducto, Heladeria heladeria){
         Producto producto = buscarProducto(idProducto, heladeria);
         if (producto==null){
-            JOptionPane.showMessageDialog(null,"No se ha encontrado el producto, intentelo de nuevo",  "Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         }else{
             if (buscarProducto(nuevoIdProducto, heladeria)==null||idProducto==nuevoIdProducto){
                     producto.setIdProducto(nuevoIdProducto);
@@ -68,34 +73,39 @@ public class Heladeria {
                     producto.setAdicionalTopping(adicionalTopping);
                     producto.setPrecioTotal(precio);
                     producto.setStockAlmacen(stockAlmacen);
+                    return true;
             }else{
-                JOptionPane.showMessageDialog(null, "Es posible que ya haya un producto registrgado con el nuevo id, intentelo nuevamente",  "Error!", JOptionPane.ERROR_MESSAGE);
-
+                return false;
             }
         }
     }
 
     /**
      * Mostrar productos existentes
+     * @param heladeria
+     * @return String
      */
-    public void mostrarProductos(){
+    public String mostrarProductos(Heladeria heladeria){
         String mensaje = "";
-        for (Producto producto:productosList) {
+        for (Producto producto:heladeria.productosList) {
             mensaje += producto.toString() +"\n_________________\n";
         }
-        JOptionPane.showMessageDialog(null,mensaje);
+        return mensaje;
     }
 
     /**
      * Eliminar producto existente
+     * @param idProducto
+     * @param heladeria
+     * @return boolean
      */
-    public void eliminarProducto(int idProducto, Heladeria heladeria) {
+    public boolean eliminarProducto(int idProducto, Heladeria heladeria) {
         Producto productoAEliminar = buscarProducto(idProducto, heladeria);
         if (productoAEliminar == null) {
-            JOptionPane.showMessageDialog(null, "Producto no encontrado",  "Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         } else {
             productosList.remove(productoAEliminar);
-            JOptionPane.showMessageDialog(null, "Producto eliminado con exito");
+            return true;
         }
     }
 
@@ -116,15 +126,16 @@ public class Heladeria {
     /**
      * Buscar productos con un stock menor a 100
      * @param heladeria
+     * @return String
      */
-    public void buscarProductoStockMenor100(Heladeria heladeria){
+    public String buscarProductoStockMenor100(Heladeria heladeria){
         String mensaje = "";
         for (Producto producto: heladeria.productosList) {
             if (producto.getStockAlmacen()<100){
                 mensaje+=producto.toString();
             }
         }
-        JOptionPane.showMessageDialog(null, mensaje);
+        return mensaje;
     }
 
     //CRUD EMPLEADO----------------------------
@@ -139,11 +150,12 @@ public class Heladeria {
      * @param antiguedad
      * @param puestoTrabajo
      * @param salario
+     * @param heladeria
+     * @return boolean
      */
-    public void crearEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad,int puestoTrabajo, double salario, Heladeria heladeria) {
+    public boolean crearEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad,int puestoTrabajo, double salario, Heladeria heladeria) {
         if (buscarEmpleado(documento, heladeria) != null){
-            JOptionPane.showMessageDialog(null, "Es posible que exista un empleado con este documento, intentelo nuevamente",  "Error!", JOptionPane.ERROR_MESSAGE);
-
+            return false;
         }else {
             Empleado empleado = new Empleado();
             empleado.setNombre(nombre);
@@ -166,10 +178,10 @@ public class Heladeria {
                     empleado.setPuestoTrabajo(PuestoTrabajo.VENDEDORA);
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "La opcion ingresada no es valida. Intente nuevamente", "Error!", JOptionPane.ERROR_MESSAGE);
+                    return false;
             }
             empleadosList.add(empleado);
-            JOptionPane.showMessageDialog(null, "El empleado ha sido creado con Exito!");
+            return true;
         }
     }
 
@@ -184,11 +196,13 @@ public class Heladeria {
      * @param puestoTrabajo
      * @param salario
      * @param nuevoIdEmpleado
+     * @param heladeria
+     * @return boolean
      */
-    public void actualizarEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, int puestoTrabajo, double salario, int nuevoIdEmpleado, Heladeria heladeria) {
+    public boolean actualizarEmpleado(String nombre, String apellido, int documento, int edad, String horario, int antiguedad, int puestoTrabajo, double salario, int nuevoIdEmpleado, Heladeria heladeria) {
         Empleado empleado = buscarEmpleado(documento, heladeria);
         if (empleado==null){
-            JOptionPane.showMessageDialog(null,"No se ha encontrado el empleado, intentelo de nuevo",  "Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         }else{
             if (buscarProducto(nuevoIdEmpleado, heladeria)==null||documento==nuevoIdEmpleado){
                 empleado.setNombre(nombre);
@@ -210,11 +224,11 @@ public class Heladeria {
                         empleado.setPuestoTrabajo(PuestoTrabajo.VENDEDORA);
                         break;
                     default:
-                        JOptionPane.showMessageDialog(null, "La opcion ingresada no es valida. Intente nuevamente",  "Error!", JOptionPane.ERROR_MESSAGE);
+                        return false;
                 }
-                JOptionPane.showMessageDialog(null, "El empleado ha sido actualizado con Exito!");
+                return true;
             }else{
-                JOptionPane.showMessageDialog(null, "Es posible que ya haya un empleado registrgado con el nuevo documento, intentelo nuevamente",  "Error!", JOptionPane.ERROR_MESSAGE);
+                return false;
             }
         }
     }
@@ -222,27 +236,30 @@ public class Heladeria {
     /**
      * eliminar empleado
      * @param idEmpleado
+     * @param heladeria
+     * @return boolean
      */
-    public void eliminarEmpleado(int idEmpleado, Heladeria heladeria) {
+    public boolean eliminarEmpleado(int idEmpleado, Heladeria heladeria) {
         Empleado empleadoEliminar = buscarEmpleado(idEmpleado, heladeria);
         if (empleadoEliminar == null) {
-            JOptionPane.showMessageDialog(null, "Empleado no encontrado",  "Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         } else {
             heladeria.empleadosList.remove(empleadoEliminar);
-            JOptionPane.showMessageDialog(null, "Empleado eliminado con exito");
-
+            return true;
         }
     }
 
     /**
      * Mostrar lista empleados
+     * @param heladeria
+     * @return String
      */
-    public void mostrarEmpleados(Heladeria heladeria){
+    public String mostrarEmpleados(Heladeria heladeria){
         String mensaje = "";
         for (Empleado empleado:heladeria.empleadosList) {
             mensaje += empleado.toString() +"\n___________\n";
         }
-        JOptionPane.showMessageDialog(null,mensaje);
+        return mensaje;
     }
 
     /**
@@ -262,8 +279,9 @@ public class Heladeria {
     /**
      * Mostrar el empleado con mas ventas
      * @param heladeria
+     * @return String
      */
-    public void mostrarEmpleadoMasVentas(Heladeria heladeria){
+    public String mostrarEmpleadoMasVentas(Heladeria heladeria){
         int ventas =0;
         Empleado empleadoMasVentas = null;
         for (Empleado empleado: heladeria.empleadosList) {
@@ -274,8 +292,8 @@ public class Heladeria {
         }
         String mensaje = "El empleado con mas ventas es: \n"+
                 empleadoMasVentas.toString()+"\n"+
-                "El nuemo de ventas realizadas por este empleado: "+ventas;
-        JOptionPane.showMessageDialog(null, mensaje);
+                "El numero de ventas realizadas por este empleado: "+ventas;
+        return mensaje;
     }
 
     //CRUD CLIENTE -------------------------------
@@ -288,8 +306,9 @@ public class Heladeria {
      * @param edad
      * @param fechaCompra
      * @param heladeria
+     * @return boolean
      */
-    public void crearCliente(String nombre, String apellido, int documento, int edad, String fechaCompra, Heladeria heladeria) {
+    public boolean crearCliente(String nombre, String apellido, int documento, int edad, String fechaCompra, Heladeria heladeria) {
         if (buscarCliente(documento, heladeria) == null) {
             Cliente cliente = new Cliente();
             cliente.setNombre(nombre);
@@ -302,13 +321,13 @@ public class Heladeria {
             try {
                 fechaConvertida = LocalDate.parse(fechaCompra, formato);
                 cliente.setFechaCompra(fechaConvertida);
-                JOptionPane.showMessageDialog(null, "El cliente ha sido creado con éxito!");
                 heladeria.clientesList.add(cliente);
+                return true;
             } catch (DateTimeParseException e) {
-                JOptionPane.showMessageDialog(null, "Algo ha salido mal con la fecha, inténtelo nuevamente", "Error!", JOptionPane.ERROR_MESSAGE);
+                return false;
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Algo ha salido mal, intentelo nuevamente.","Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 
@@ -321,11 +340,12 @@ public class Heladeria {
      * @param fechaCompra
      * @param nuevoDocumento
      * @param heladeria
+     * @return boolean
      */
-    public void actualizarCliente(String nombre, String apellido, int documento, int edad, String fechaCompra, int nuevoDocumento, Heladeria heladeria) {
+    public boolean actualizarCliente(String nombre, String apellido, int documento, int edad, String fechaCompra, int nuevoDocumento, Heladeria heladeria) {
         Cliente cliente = buscarCliente(documento, heladeria);
         if (cliente==null){
-            JOptionPane.showMessageDialog(null,"No se ha encontrado el cliente, intentelo de nuevo",  "Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         }else{
             if (buscarCliente(nuevoDocumento, heladeria)==null||documento==nuevoDocumento){
                 cliente.setNombre(nombre);
@@ -336,39 +356,42 @@ public class Heladeria {
                 try {
                     fechaConvertida = LocalDate.parse(fechaCompra, formato);
                     cliente.setFechaCompra(fechaConvertida);
-                    JOptionPane.showMessageDialog(null, "El cliente ha sido actualizado con Exito!");
+                    return true;
                 } catch (DateTimeParseException e) {
-                    JOptionPane.showMessageDialog(null, "Algo ha salido mal con la fecha, inténtelo nuevamente", "Error!", JOptionPane.ERROR_MESSAGE);
+                    return false;
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "Es posible que ya haya un cliente registrgado con el nuevo documento, intentelo nuevamente",  "Error!", JOptionPane.ERROR_MESSAGE);
+                return false;
             }
         }
     }
+
     /**
      * Mostrar la lista de clientes
      * @param heladeria
+     * @return String
      */
-    public void mostrarClientes(Heladeria heladeria){
+    public String mostrarClientes(Heladeria heladeria){
         String mensaje = "";
         for (Cliente cliente:heladeria.clientesList) {
             mensaje += cliente.toString() +"\n___________\n";
         }
-        JOptionPane.showMessageDialog(null,mensaje);
+        return mensaje;
     }
 
     /**
      * Eliminar un cliente exixtente
      * @param idCliente
      * @param heladeria
+     * @return bolean
      */
-    public void eliminarCliente(int idCliente, Heladeria heladeria) {
+    public boolean eliminarCliente(int idCliente, Heladeria heladeria) {
         Cliente clienteEliminar = buscarCliente(idCliente, heladeria);
         if (clienteEliminar == null) {
-            JOptionPane.showMessageDialog(null, "Cliente no encontrado",  "Error!", JOptionPane.ERROR_MESSAGE);
+            return false;
         } else {
             heladeria.clientesList.remove(clienteEliminar);
-            JOptionPane.showMessageDialog(null, "Cliente eliminado con exito");
+            return true;
         }
     }
 
@@ -387,7 +410,12 @@ public class Heladeria {
         return null;
     }
 
-    public void mostrarClienteMasReciente(Heladeria heladeria){
+    /**
+     * Mostrar cliente mas reciente
+     * @param heladeria
+     * @returnv String
+     */
+    public String mostrarClienteMasReciente(Heladeria heladeria){
         LocalDate fechaClienteMasReciente = clientesList.get(0).getFechaCompra();
         Cliente clienteMasReciente = clientesList.get(0);
         for (Cliente cliente: heladeria.clientesList) {
@@ -399,6 +427,8 @@ public class Heladeria {
         }
 
         String mensaje = "El cliente mas reciente es: \n"+clienteMasReciente.toString();
+        return mensaje;
+
     }
 
    //CRUD TRANSACCION VENTA-----------------
@@ -412,28 +442,28 @@ public class Heladeria {
      * @param cantidad
      * @param fechaCompra
      * @param heladeria
+     * @return boolean
      */
-    public void crearVenta(int idVenta, int idEmpleadoAsociado, int idClienteAsociado, int idProductoAsociado, int cantidad, String fechaCompra, Heladeria heladeria){
+    public boolean crearVenta(int idVenta, int idEmpleadoAsociado, int idClienteAsociado, int idProductoAsociado, int cantidad, String fechaCompra, Heladeria heladeria){
         Empleado empleadoAsociado;
         Cliente clienteAsociado;
         if (buscarVenta(idVenta, heladeria) == null){
             empleadoAsociado = buscarEmpleado(idEmpleadoAsociado, heladeria);
             clienteAsociado = buscarCliente(idClienteAsociado, heladeria);
             if (empleadoAsociado == null || clienteAsociado == null){
-                JOptionPane.showMessageDialog(null, "Alguno de los Id ingresados no se encuentra en el sistema");
+                return false;
             }else if (empleadoAsociado.getPuestoTrabajo() == PuestoTrabajo.VENDEDORA){
                 Venta venta = new Venta(idVenta,empleadoAsociado,clienteAsociado, heladeria);
                 heladeria.ventasList.add(venta);
                 empleadoAsociado.getVentasAsociadas().add(venta);
                 clienteAsociado.getVentasAsociadas().add(venta);
                 venta.crearDetalleVenta(cantidad, fechaCompra, idProductoAsociado);
-                JOptionPane.showMessageDialog(null, venta.toString());
+                return true;
             }else{
-                JOptionPane.showMessageDialog(null, "Es posible que el empleado que ha ingresado no sea un(a) vendedor(a)");
+                return false;
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Ya se encuentra registrada una venta con este ID");
         }
+        return false;
     }
 
     /**
@@ -446,27 +476,28 @@ public class Heladeria {
      * @param cantidad
      * @param fechaCompra
      * @param heladeria
+     * @return boolean
      */
-    public void actualizarVenta(int idVenta, int nuevoIdVenta, int idEmpleadoAsociado, int idClienteAsociado, int idProductoAsociado, int cantidad, String fechaCompra, Heladeria heladeria){
+    public boolean actualizarVenta(int idVenta, int nuevoIdVenta, int idEmpleadoAsociado, int idClienteAsociado, int idProductoAsociado, int cantidad, String fechaCompra, Heladeria heladeria){
         Empleado empleadoAsociado;
         Cliente clienteAsociado;
         if (buscarVenta(nuevoIdVenta, heladeria) == null || nuevoIdVenta==idVenta){
             empleadoAsociado = buscarEmpleado(idEmpleadoAsociado, heladeria);
             clienteAsociado = buscarCliente(idClienteAsociado, heladeria);
             if (empleadoAsociado == null || clienteAsociado == null){
-                JOptionPane.showMessageDialog(null, "Alguno de los Id ingresados no se encuentra en el sistema");
+                return false;
             }else if (empleadoAsociado.getPuestoTrabajo() == PuestoTrabajo.VENDEDORA){
                 Venta venta = buscarVenta(nuevoIdVenta, heladeria);
                 venta.setIdVenta(nuevoIdVenta);
                 venta.setClienteAsociado(clienteAsociado);
                 venta.setEmpleadoAsociado(empleadoAsociado);
                 venta.crearDetalleVenta(cantidad, fechaCompra, idProductoAsociado);
-                JOptionPane.showMessageDialog(null, venta.toString());
+                return true;
             }else{
-                JOptionPane.showMessageDialog(null, "Es posible que el empleado que ha ingresado no sea un(a) vendedor(a)");
+                return false;
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Ya se encuentra registrada una venta con este nuevo ID");
+            return false;
         }
     }
 
@@ -474,29 +505,30 @@ public class Heladeria {
      * Eliminar una venta existente
      * @param idVenta
      * @param heladeria
+     * @return boolean
      */
-    public void eliminarVenta(int idVenta,  Heladeria heladeria) {
+    public boolean eliminarVenta(int idVenta,  Heladeria heladeria) {
         Venta venta = buscarVenta(idVenta, heladeria);
         if (venta == null) {
-            JOptionPane.showMessageDialog(null, "La venta no fue encontrada");
+            return false;
         } else {
             venta.getClienteAsociado().getVentasAsociadas().remove(venta);
             venta.getEmpleadoAsociado().getVentasAsociadas().remove(venta);
             heladeria.ventasList.remove(venta);
-            JOptionPane.showMessageDialog(null, "Venta eliminada exitosamente!");
+            return true;
         }
     }
 
     /**
-     * Mostrar la olista de ventas
+     * Mostrar la lista de ventas
      * @param heladeria
      */
-    public void mostrarVentas(Heladeria heladeria){
+    public String mostrarVentas(Heladeria heladeria){
         String mensaje = "";
         for (Venta venta : heladeria.ventasList) {
             mensaje += venta.toString();
         }
-        JOptionPane.showMessageDialog(null,mensaje);
+        return mensaje;
     }
 
     /**
@@ -513,7 +545,7 @@ public class Heladeria {
         }
         return null;
     }
-    public void buscarVentasRealizadasFecha(String fechaVenta, Heladeria heladeria){
+    public String buscarVentasRealizadasFecha(String fechaVenta, Heladeria heladeria){
         String mensaje = "";
         LocalDate fechaConvertida;
         try {
@@ -523,9 +555,9 @@ public class Heladeria {
                     mensaje+=venta.toString();
                 }
             }
-            JOptionPane.showMessageDialog(null, mensaje);
+            return mensaje;
         } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "Algo ha salido mal con la fecha, inténtelo nuevamente", "Error!", JOptionPane.ERROR_MESSAGE);
+            return "Algo ha salido mal con la fecha, inténtelo nuevamente";
         }
 
     }
@@ -599,6 +631,10 @@ public class Heladeria {
         return opcion;
     }
 
+    /**
+     * Menu con opciones para acceder a los otros menus
+     * @return int
+     */
     public int menuPrincipal(){
         String mensaje = "Seleccione una opcion: \n"+
                 "1. Mostrar Opciones cliente \n"+

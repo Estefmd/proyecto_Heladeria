@@ -18,7 +18,12 @@ public class Main {
         int documento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del cliente que desea registrar"));
         int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del cliente que desea registrar"));
         String fechaCompra = JOptionPane.showInputDialog("Ingrese la fecha de compra (año-mes-dia)");
-        heladeria.crearCliente(nombre, apellido, documento, edad, fechaCompra, heladeria);
+        boolean exitoso = heladeria.crearCliente(nombre, apellido, documento, edad, fechaCompra, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "Cliente creado de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "Algo ha salido mal, intentelo nuevamente");
+        }
     }
     private static void actualizarCliente(Heladeria heladeria) {
         int documento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del cliente que desea actualizar"));
@@ -27,14 +32,24 @@ public class Main {
         String apellido = JOptionPane.showInputDialog("Ingrese el nuevo apellido del cliente");
         int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva edad del cliente"));
         String fechaCompra = JOptionPane.showInputDialog("Ingrese la nueva fecha de compra (año-mes-dia)");
-        heladeria.actualizarCliente(nombre, apellido, documento, edad, fechaCompra, nuevoDocumento, heladeria);
+        boolean exitoso = heladeria.actualizarCliente(nombre, apellido, documento, edad, fechaCompra, nuevoDocumento, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "Cliente actualizado de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "Algo ha salido mal, intentelo nuevamente");
+        }
     }
     private static void eliminarCliente(Heladeria heladeria) {
         int idCliente = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del cliente que desea eliminar: "));
-        heladeria.eliminarCliente(idCliente, heladeria);
+        boolean exitoso = heladeria.eliminarCliente(idCliente, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "Cliente eliminado de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "Cliente no encontrado, intentelo nuevamente");
+        }
     }
     private static void mostrarClientes(Heladeria heladeria) {
-        heladeria.mostrarClientes(heladeria);
+        JOptionPane.showMessageDialog(null, heladeria.mostrarClientes(heladeria));
     }
     private static void buscarClienteID(Heladeria heladeria){
         int idCliente = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del cliente que ddesea buscar: "));
@@ -46,7 +61,7 @@ public class Main {
         }
     }
     private static void mostarClienteMasReciente(Heladeria heladeria){
-        heladeria.mostrarClienteMasReciente(heladeria);
+        JOptionPane.showMessageDialog(null, heladeria.mostrarClienteMasReciente(heladeria));
     }
 
     //CRUD DE LA CLASE EMPLEADO-------------------------
@@ -63,7 +78,12 @@ public class Main {
             puestoTrabajo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el puesto de trabajo del empleado que desea registrar \n 1. Cajera \n 2. Mesera \n 3. Vendedora"));
         }while(puestoTrabajo!=1 && puestoTrabajo!=2 && puestoTrabajo!=3);
 
-        heladeria.crearEmpleado( nombre,  apellido,  documento,  edad, horario, antiguedad, puestoTrabajo, salario, heladeria);
+        boolean exitoso = heladeria.crearEmpleado( nombre,  apellido,  documento,  edad, horario, antiguedad, puestoTrabajo, salario, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "Empleado creado de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "Algo ha salido mal, intentelo nuevamente");
+        }
     }
     private static void actualizarEmpleado(Heladeria heladeria) {
         int documento = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del empleado que desea actualizar"));
@@ -79,14 +99,24 @@ public class Main {
             puestoTrabajo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el puesto de trabajo del empleado que desea registrar \n 1. Cajera \n 2. Mesera \n 3. Vendedora"));
         }while(puestoTrabajo!=1 && puestoTrabajo!=2 && puestoTrabajo!=3);
 
-        heladeria.actualizarEmpleado( nombre,  apellido,  documento,  edad, horario, antiguedad, puestoTrabajo, salario, nuevoDocumento, heladeria);
+        boolean exitoso = heladeria.actualizarEmpleado( nombre,  apellido,  documento,  edad, horario, antiguedad, puestoTrabajo, salario, nuevoDocumento, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "Empleado actualizado de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "Algo ha salido mal, intentelo nuevamente");
+        }
     }
     private static void eliminarEmpleado(Heladeria heladeria) {
         int idEmpleado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el documento del empleado que desea eliminar: "));
-        heladeria.eliminarEmpleado(idEmpleado, heladeria);
+        boolean exitoso = heladeria.eliminarEmpleado(idEmpleado, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "Empleado eliminado de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "Empleado no encontrado, intentelo nuevamente");
+        }
     }
     private static void mostrarEmpleados(Heladeria heladeria) {
-        heladeria.mostrarEmpleados(heladeria);
+        JOptionPane.showMessageDialog(null,heladeria.mostrarEmpleados(heladeria));
     }
     private static void buscarEmpleadoID(Heladeria heladeria){
         int idEmpleado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del empleado que ddesea buscar: "));
@@ -98,7 +128,7 @@ public class Main {
         }
     }
     private static void mostrarEmpleadoMasVentas(Heladeria heladeria){
-        heladeria.mostrarEmpleadoMasVentas(heladeria);
+        JOptionPane.showMessageDialog(null, heladeria.mostrarEmpleadoMasVentas(heladeria));
     }
 
 
@@ -111,7 +141,12 @@ public class Main {
         int stockAlmacen = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad disponible del producto a registrar: "));
         double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio de el producto: "));
         int  idProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del producto a registrar"));
-        heladeria.crearProducto(sabor, nombre, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto, heladeria);
+        boolean exitoso = heladeria.crearProducto(sabor, nombre, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "Producto creado de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "Algo ha salido mal, intentelo nuevamente");
+        }
     }
     private static void actualizarProducto(Heladeria heladeria) {
         String sabor = JOptionPane.showInputDialog("Ingrese el sabor que desea actualizar: ");
@@ -122,14 +157,24 @@ public class Main {
         double precio = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el precio que desea actualizar:o: "));
         int  idProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del producto a actulizar"));
         int  nuevoIdProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo ID del producto (este puede ser el anterior)"));
-        heladeria.actualizarProducto(sabor, nombre, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto, nuevoIdProducto, heladeria);
+        boolean exitoso = heladeria.actualizarProducto(sabor, nombre, adicionalTopping, tipoProducto, stockAlmacen, precio, idProducto, nuevoIdProducto, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "Producto actualizado de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "Algo ha salido mal, intentelo nuevamente");
+        }
     }
     private static void eliminarProducto(Heladeria heladeria) {
         int idProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del producto que desea eliminar: "));
-        heladeria.eliminarProducto(idProducto, heladeria);
+        boolean exitoso = heladeria.eliminarProducto(idProducto, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "Producto eliminado de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha encontrado el producto, intentelo nuevamente");
+        }
     }
     private static void mostrarProductos(Heladeria heladeria) {
-        heladeria.mostrarProductos();
+        JOptionPane.showMessageDialog(null, heladeria.mostrarProductos(heladeria));
     }
     private static void buscarProductoID(Heladeria heladeria){
         int idProducto = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del producto que ddesea buscar: "));
@@ -141,7 +186,7 @@ public class Main {
         }
     }
     private static void buscarProductoStockMenor100(Heladeria heladeria){
-        heladeria.buscarProductoStockMenor100(heladeria);
+        JOptionPane.showMessageDialog(null, heladeria.buscarProductoStockMenor100(heladeria));
     }
 
 
@@ -153,8 +198,13 @@ public class Main {
         int idEmpleadoAsociado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del empleado que realiza la venta: "));
         int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad que el cliente desea compar del producto: "));
         String fechaCompra = JOptionPane.showInputDialog("Ingrese la fecha de compra (año-mes-dia)");
-        heladeria.crearVenta(idVenta,idEmpleadoAsociado, idClienteAsociado, idProductoAsociado, cantidad, fechaCompra, heladeria);
-
+        boolean exitoso = heladeria.crearVenta(idVenta,idEmpleadoAsociado, idClienteAsociado, idProductoAsociado, cantidad, fechaCompra, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "La venta fue creada de manera exitosa");
+            JOptionPane.showMessageDialog(null, heladeria.buscarVenta(idVenta, heladeria).toString());
+        }else{
+            JOptionPane.showMessageDialog(null, "Ocurrio un error, intentelo nuevamente");
+        }
     }
     public static void actualizarVenta(Heladeria heladeria){
         int idVenta = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID de la venta que desea actualizar: "));
@@ -164,14 +214,25 @@ public class Main {
         int idEmpleadoAsociado = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID actualizado del empleado que realiza la venta: "));
         int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad actualizada que el cliente desea compar del producto: "));
         String fechaCompra = JOptionPane.showInputDialog("Ingrese la fecha actualizada de compra (año-mes-dia)");
-        heladeria.actualizarVenta(idVenta, nuevoIdVenta, idEmpleadoAsociado, idClienteAsociado, idProductoAsociado, cantidad, fechaCompra, heladeria);
+        boolean exitoso = heladeria.actualizarVenta(idVenta, nuevoIdVenta, idEmpleadoAsociado, idClienteAsociado, idProductoAsociado, cantidad, fechaCompra, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "La venta fue actualizada de manera exitosa");
+            JOptionPane.showMessageDialog(null, heladeria.buscarVenta(idVenta, heladeria).toString());
+        }else{
+            JOptionPane.showMessageDialog(null, "Ocurrio un error, intentelo nuevamente");
+        }
     }
     public static void eliminarVenta(Heladeria heladeria){
         int idVenta = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el ID del producto que desea eliminar: "));
-        heladeria.eliminarVenta(idVenta, heladeria);
+        boolean exitoso = heladeria.eliminarVenta(idVenta, heladeria);
+        if (exitoso){
+            JOptionPane.showMessageDialog(null, "La venta fue eliminada de manera exitosa");
+        }else{
+            JOptionPane.showMessageDialog(null, "Venta no encontrada, intentelo nuevamente");
+        }
     }
     public static  void mostrarVentas(Heladeria heladeria){
-        heladeria.mostrarVentas(heladeria);
+        JOptionPane.showMessageDialog(null, heladeria.mostrarVentas(heladeria));
     }
     private static void buscarVentaID(Heladeria heladeria){
         int idVenta = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del venta que ddesea buscar: "));
@@ -182,9 +243,9 @@ public class Main {
             JOptionPane.showMessageDialog(null, venta.toString());
         }
     }
-    private static void buscarVentaDia(Heladeria heladeria){
+    private static void buscarVentaDia(Heladeria heladeria) {
         String fechaVenta = JOptionPane.showInputDialog("Ingrese la fecha de la cual desea saber las ventas: ");
-        heladeria.buscarVentasRealizadasFecha(fechaVenta, heladeria);
+        JOptionPane.showMessageDialog(null, heladeria.buscarVentasRealizadasFecha(fechaVenta, heladeria));
     }
 
 
@@ -211,9 +272,6 @@ public class Main {
                     break;
                 case 6:
                     buscarProductoStockMenor100(heladeria);
-                    break;
-                case 7:
-                    mostrarMenuPrincipal(heladeria);
                     break;
             }
         } while (opcion != 7);
@@ -242,9 +300,6 @@ public class Main {
                 case 6:
                     mostrarEmpleadoMasVentas(heladeria);
                     break;
-                case 7:
-                    mostrarMenuPrincipal(heladeria);
-                    break;
             }
         } while (opcion != 7);
     }
@@ -272,10 +327,6 @@ public class Main {
                 case 6:
                     mostarClienteMasReciente(heladeria);
                     break;
-                case 7:
-                    mostrarMenuPrincipal(heladeria);
-                    break;
-
             }
         } while (opcion != 7);
     }
@@ -303,13 +354,10 @@ public class Main {
                 case 6:
                     buscarVentaDia(heladeria);
                     break;
-                case 7:
-                    mostrarMenuPrincipal(heladeria);
-                    break;
-
             }
         } while (opcion != 7);
     }
+
     public static void mostrarMenuPrincipal(Heladeria heladeria){
         int opcion = 0;
         do {
