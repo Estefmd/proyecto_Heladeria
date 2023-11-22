@@ -6,14 +6,16 @@ public class DetalleVenta {
     private int cantidad;
     private LocalDate fechaCompra;
     private Venta OwnedByVenta;
+    private Producto productoAsociado;
 
     public DetalleVenta() {
     }
 
-    public DetalleVenta(int cantidad, LocalDate fechaCompra, Venta ownedByVenta) {
+    public DetalleVenta(int cantidad, LocalDate fechaCompra, Venta ownedByVenta, Producto productoAsociado) {
         this.cantidad = cantidad;
         this.fechaCompra = fechaCompra;
         OwnedByVenta = ownedByVenta;
+        this.productoAsociado = productoAsociado;
     }
 
     public int getCantidad() {
@@ -40,12 +42,19 @@ public class DetalleVenta {
         OwnedByVenta = ownedByVenta;
     }
 
+    public Producto getProductoAsociado() {
+        return productoAsociado;
+    }
+
+    public void setProductoAsociado(Producto productoAsociado) {
+        this.productoAsociado = productoAsociado;
+    }
+
     @Override
     public String toString() {
         return "DetalleVenta " +
-                "cantidad :" + cantidad +
-                "fechaCompra :" + fechaCompra +
-                "OwnedByVenta :" + OwnedByVenta +
+                "cantidad :" + cantidad + '\n'+
+                "fechaCompra :" + fechaCompra +'\n'+
                 "_____";
     }
 }

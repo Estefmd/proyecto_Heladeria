@@ -2,9 +2,9 @@ package co.edu.uniquindio.Heladeria.model;
 
 public class Producto {
     private String sabor;
-    private String tipoCono;
     private String adicionalTopping;
     private String tipoProducto;
+    private String nombre;
     private int stockAlmacen;
     private double precioTotal;
     private int idProducto;
@@ -14,14 +14,15 @@ public class Producto {
     public Producto(){
     }
 
-    public Producto(String sabor, String tipoCono, String adicionalTopping, String tipoProducto, int stockAlmacen, double precioTotal, int idProducto) {
+    public Producto(String sabor, String adicionalTopping, String tipoProducto, String nombre, int stockAlmacen, double precioTotal, int idProducto, Heladeria ownedByHeladeria) {
         this.sabor = sabor;
-        this.tipoCono = tipoCono;
         this.adicionalTopping = adicionalTopping;
         this.tipoProducto = tipoProducto;
+        this.nombre = nombre;
         this.stockAlmacen = stockAlmacen;
         this.precioTotal = precioTotal;
         this.idProducto = idProducto;
+        this.ownedByHeladeria = ownedByHeladeria;
     }
 
     public Heladeria getOwnedByHeladeria() {
@@ -40,12 +41,12 @@ public class Producto {
         this.sabor = sabor;
     }
 
-    public String getTipoCono() {
-        return tipoCono;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTipoCono(String tipoCono) {
-        this.tipoCono = tipoCono;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getAdicionalTopping() {
@@ -91,8 +92,8 @@ public class Producto {
     @Override
     public String toString() {
         return "Producto: " + "\n" +
+                "nombre: " + nombre + "\n" +
                 "sabor: " + sabor + "\n" +
-                "tipoCono: " + tipoCono + "\n" +
                 "adicionalTopping: " + adicionalTopping + "\n" +
                 "tipoProducto: " + tipoProducto + "\n" +
                 "stockAlmacen: " + stockAlmacen + "\n" +

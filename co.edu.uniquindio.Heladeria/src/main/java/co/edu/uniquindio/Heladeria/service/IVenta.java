@@ -1,10 +1,10 @@
 package co.edu.uniquindio.Heladeria.service;
 
+import co.edu.uniquindio.Heladeria.model.Producto;
+
 import java.time.LocalDate;
 
 public interface IVenta {
-    void crearDetalleVenta(int cantidad, LocalDate fechaCompra);
-    void eliminarDetalleVenta(String idVenta);
+    void crearDetalleVenta(int cantidad, String fechaCompra, int idProductoAsosiado);
 
-    // double calcularTotal(String idVenta);
 }
