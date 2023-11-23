@@ -131,7 +131,6 @@ public class Main {
         JOptionPane.showMessageDialog(null, heladeria.mostrarEmpleadoMasVentas(heladeria));
     }
 
-
     //CRUD DE LA CLASE PRODUCTO-------------------------------
     public static void crearProducto(Heladeria heladeria) {
         String sabor = JOptionPane.showInputDialog("Ingrese el sabor del producto a registrar: ");
@@ -188,7 +187,6 @@ public class Main {
     private static void buscarProductoStockMenor100(Heladeria heladeria){
         JOptionPane.showMessageDialog(null, heladeria.buscarProductoStockMenor100(heladeria));
     }
-
 
     //CRUD DE LA TRANSACCION VENTA
     public static void crearVenta(Heladeria heladeria){
@@ -247,7 +245,6 @@ public class Main {
         String fechaVenta = JOptionPane.showInputDialog("Ingrese la fecha de la cual desea saber las ventas: ");
         JOptionPane.showMessageDialog(null, heladeria.buscarVentasRealizadasFecha(fechaVenta, heladeria));
     }
-
 
     //MENUS DE LOS DIFERENTES CRUDS Y TRANSACCIONES-----------------
     public static void mostrarMenuProducto(Heladeria heladeria){
