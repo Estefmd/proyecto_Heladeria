@@ -13,6 +13,9 @@ import java.time.format.DateTimeFormatter;
 public class Heladeria {
     private String nombre;
 
+    public Heladeria() {
+    }
+
     public Heladeria(String nombre) {
         this.nombre = nombre;
     }
@@ -644,5 +647,53 @@ public class Heladeria {
                 "5. Salir \n";
         int opcion = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
         return opcion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Producto> getProductosList() {
+        return productosList;
+    }
+
+    public void setProductosList(List<Producto> productosList) {
+        this.productosList = productosList;
+    }
+
+    public List<Empleado> getEmpleadosList() {
+        return empleadosList;
+    }
+
+    public void setEmpleadosList(List<Empleado> empleadosList) {
+        this.empleadosList = empleadosList;
+    }
+
+    public List<Cliente> getClientesList() {
+        return clientesList;
+    }
+
+    public void setClientesList(List<Cliente> clientesList) {
+        this.clientesList = clientesList;
+    }
+
+    public List<Venta> getVentasList() {
+        return ventasList;
+    }
+
+    public void setVentasList(List<Venta> ventasList) {
+        this.ventasList = ventasList;
+    }
+
+    public DateTimeFormatter getFormato() {
+        return formato;
+    }
+
+    public void setFormato(DateTimeFormatter formato) {
+        this.formato = formato;
     }
 }
